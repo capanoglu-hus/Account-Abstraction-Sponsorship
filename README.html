@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Foundry</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <span id="markdown-mermaid" aria-hidden="true" data-config="{&quot;darkModeTheme&quot;:&quot;vscode&quot;,&quot;lightModeTheme&quot;:&quot;vscode&quot;,&quot;maxTextSize&quot;:50000,&quot;clickDrag&quot;:&quot;alt&quot;,&quot;showControls&quot;:&quot;onHoverOrFocus&quot;,&quot;resizable&quot;:true,&quot;maxHeight&quot;:&quot;&quot;}"></span>
+				<h2 id="foundry">Foundry</h2>
+<h2 id="sepoliada-deploy-edilmiş-contract-adresler">Sepolia'da deploy edilmiş contract adresler</h2>
+<p>Resmi sepoliaEntryPoint = 0x0000000071727De22E5E9d8BAf0edAc6f37da032;
+SimpleAccountFactory = 0x8B15cA3e809aFae4039aF05F6D7Eb117e056C5bE;
+Paymaster = 0xB12C53F7Ab00897Cb8990afbEFb239A418aBea4d;
+testToken = 0x759f62A65f5A2dEb8Afe344504200156FfAA6528;</p>
+<h2 id="transaction-işlemleri-etherscan-linkleri-ile-verification">Transaction işlemleri Etherscan link'leri ile verification</h2>
+<ol>
+<li>
+<p>A cüzdanı oluştur --&gt;        [0x24b6d124afc2724fb0cae66313290d911ffb50c770541a7cd10c72331dfd6199] (<a href="https://sepolia.etherscan.io/tx/0x24b6d124afc2724fb0cae66313290d911ffb50c770541a7cd10c72331dfd6199">https://sepolia.etherscan.io/tx/0x24b6d124afc2724fb0cae66313290d911ffb50c770541a7cd10c72331dfd6199</a>)</p>
+</li>
+<li>
+<p>A cüzdanı adress --&gt;
+[0xee3E49ef57c871036B8Aa19B6576429ae3EA1B44]
+(<a href="https://sepolia.etherscan.io/address/0xee3e49ef57c871036b8aa19b6576429ae3ea1b44#tokentxns">https://sepolia.etherscan.io/address/0xee3e49ef57c871036b8aa19b6576429ae3ea1b44#tokentxns</a>)</p>
+</li>
+<li>
+<p>B cüzdanı --&gt;
+[0xc1c515e4d4893AA981176f053478833D6045e321]
+(<a href="https://sepolia.etherscan.io/address/0xc1c515e4d4893aa981176f053478833d6045e321#tokentxns">https://sepolia.etherscan.io/address/0xc1c515e4d4893aa981176f053478833d6045e321#tokentxns</a>)</p>
+</li>
+<li>
+<p>TestToken mint etme --&gt;
+[0x99e8945e12f41468e2aa70036153fcc92f056e04ea25e9b2b2d7830a287e10fe]
+(<a href="https://sepolia.etherscan.io/tx/0x99e8945e12f41468e2aa70036153fcc92f056e04ea25e9b2b2d7830a287e10fe">https://sepolia.etherscan.io/tx/0x99e8945e12f41468e2aa70036153fcc92f056e04ea25e9b2b2d7830a287e10fe</a>)</p>
+</li>
+<li>
+<p>Deposit To (EntryPoint'e Paymaster tarafından depozit verilmesi)
+(<a href="https://sepolia.etherscan.io/tx/0x58af14d2c19f416fa7136cdfffd1ed365c639208c12aa4844d117b5f5653b714">https://sepolia.etherscan.io/tx/0x58af14d2c19f416fa7136cdfffd1ed365c639208c12aa4844d117b5f5653b714</a>)</p>
+</li>
+<li>
+<p>A'dan B'ye token transfer et (gas sponsor adresinden kesilsin) --&gt;
+[0xb40278b407c07e6ab018b0f88f6663863c8d6f7bcc41cccef13c4446e068e944]
+(<a href="https://sepolia.etherscan.io/tx/0xb40278b407c07e6ab018b0f88f6663863c8d6f7bcc41cccef13c4446e068e944">https://sepolia.etherscan.io/tx/0xb40278b407c07e6ab018b0f88f6663863c8d6f7bcc41cccef13c4446e068e944</a>)
+(Gas ücreti Paymaster depozitosundan karşılandı, işlem Bundler tarafından ağa gönderildi)</p>
+</li>
+</ol>
+<h2 id="setup-talimatları">Setup Talimatları</h2>
+
+            
+            
+        </body>
+        </html>

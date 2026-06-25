@@ -1,4 +1,4 @@
-# ERC-4337 v0.7 Account Abstraction & Paymaster Sponsorship Project
+# ERC-4337 v0.7 Account Abstraction & Paymaster Sponsorship Projesi
 
 ## Proje Detayları 
 Sepolia testnet'inde Account Abstraction (ERC-4337) kullanarak yeni bir A cüzdanı oluşturuyoruz. A cüzdanına test token olan USDX tokeni mint ediyoruz. A cüzdanın içinde USDX tokendan başka bir değer yok. A cüzdanından B cüzdanına token transferi gerçekleştirirken,gas fee ödemesi için paymaster ile bir sponsor cüzdanı ayarlıyoruz. Transfer işlemini bir bundler alıyor ve EntryPoint'e gidip sponsor'un gerçekte olup olmadığını kontrol ediyor. Entrypoint contractında sponsor bakiyesi varsa işlemi bundler ağa gönderiliyor. Sonra burada harcanan gası entryPoint contractı içinde bulunan sponsor hesabından alınıp bundler'a ödeniyor.Yani A cüzdanında hiç eth olmadan gönderim işlemi yapılıyor en sonunda transfer gas fee'leri sponsor cüzdanından kesiliyor.
@@ -96,32 +96,32 @@ forge script script/RunSponsorship.s.sol:RunSponsorship \
 
 ##### local test
      
-     <img width="1577" height="432" alt="testlocal" src="https://github.com/user-attachments/assets/45a1465c-d243-4f1f-938d-9e7edd44252c" />
+   <img width="1577" height="432" alt="testlocal" src="https://github.com/user-attachments/assets/45a1465c-d243-4f1f-938d-9e7edd44252c" />
 
 ##### anvil test
 
-     <img width="1802" height="437" alt="anviltest2" src="https://github.com/user-attachments/assets/2021b79a-fbd1-4ed9-98c0-b92b0957c5c4" />
+   <img width="1802" height="437" alt="anviltest2" src="https://github.com/user-attachments/assets/2021b79a-fbd1-4ed9-98c0-b92b0957c5c4" />
 
 
 
 ##### sepolia fork test
 
-     <img width="1822" height="437" alt="sepolia fork test" src="https://github.com/user-attachments/assets/fe4bc21e-d86a-4f14-929b-1eaca173e9ba" />
+   <img width="1822" height="437" alt="sepolia fork test" src="https://github.com/user-attachments/assets/fe4bc21e-d86a-4f14-929b-1eaca173e9ba" />
 
 
 
 ##### sepolia canlı ağ consol logları
 
-     <img width="1853" height="805" alt="consolçıktı" src="https://github.com/user-attachments/assets/deeb0340-5a94-493f-b49f-ea4153490f30" />
+   <img width="1853" height="805" alt="consolçıktı" src="https://github.com/user-attachments/assets/deeb0340-5a94-493f-b49f-ea4153490f30" />
 
 
 ###### Tranasction HASH
 
-     <img width="962" height="572" alt="gercekagislem" src="https://github.com/user-attachments/assets/60b26608-2198-4728-bb03-eacd9301f16f" />
+   <img width="962" height="572" alt="gercekagislem" src="https://github.com/user-attachments/assets/60b26608-2198-4728-bb03-eacd9301f16f" />
 
 ###### Oluşturulan Wallet ve transfer işlemi
 
-     <img width="1663" height="187" alt="aWalletTransaction" src="https://github.com/user-attachments/assets/23c9051e-9d71-4e71-9507-f3f8362dd540" />
+   <img width="1663" height="187" alt="aWalletTransaction" src="https://github.com/user-attachments/assets/23c9051e-9d71-4e71-9507-f3f8362dd540" />
 
 
 

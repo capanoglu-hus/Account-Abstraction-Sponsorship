@@ -112,7 +112,8 @@ forge script script/RunSponsorship.s.sol:RunSponsorship \
 
 ##### sepolia canlı ağ consol logları
 
-   <img width="1853" height="805" alt="consolçıktı" src="https://github.com/user-attachments/assets/deeb0340-5a94-493f-b49f-ea4153490f30" />
+   <img width="1853" height="689" alt="consolçıktı" src="https://github.com/user-attachments/assets/04026e25-d0eb-4faa-8fe9-95d0d49d9766" />
+
 
 
 ###### Tranasction HASH
@@ -124,7 +125,9 @@ forge script script/RunSponsorship.s.sol:RunSponsorship \
    <img width="1663" height="187" alt="aWalletTransaction" src="https://github.com/user-attachments/assets/23c9051e-9d71-4e71-9507-f3f8362dd540" />
 
 
+###### Bundler adresine EntryPoint'dan gas ödemesi 
 
+   <img width="1267" height="131" alt="entryden builder a gelen para" src="https://github.com/user-attachments/assets/d65b08e5-26d0-4599-99b7-7b740d94e503" />
 
 
 

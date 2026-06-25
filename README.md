@@ -9,14 +9,17 @@ Sepolia testnet'inde Account Abstraction (ERC-4337) kullanarak yeni bir A cüzda
 
 #### src dosyaları
 
-* **SimpleAccount.sol** : Account-abstraction (erc4337) ile oluşturuldu. 
+* **SimpleAccount.sol** : Account-abstraction (erc4337) ile oluşturuldu.
+   
       * **validateUserOp** -> Kullanıcı bilgilerini, kullanıcı imza hashını,ödenecek min. tutar miktarını alır.
       * **validateSignature** -> EIP-191 imzalama işlemi ile userOpHash'dan gelen imza   doğrulaması yapılır.
       * **execute** -->  Transfer adresi,gönderilecek tutar,işlem bilgilerini alır.
 * **SimpleAccountFactory.sol** : SimpleAccount ile yeni wallet oluşturmak için  kullanılır.
+  
       * **createAccount** -> owner ve salt ile işlem yapar. Yeni cüzdan deploy eden adresin bilgileriyle oluşur
       * **getAddress** -> owner ve salt ile işlem yapar.Create2 kullanılır, matematiksel olarak adresi hesaplar.
-* **Paymaster.sol** : BasePaymaster ile oluşturulur. Sponsor contract. 
+* **Paymaster.sol** : BasePaymaster ile oluşturulur. Sponsor contract.
+  
       * **_validatePaymasterUserOp** -> userOp, userOpHash, ayarlanan gas miktarının gönderilmesi ve onaylanması yapılır.
       * **getCheckBalance** -> EntryPoint contractında bulunan balance kontrolunü yapar.
 * **TestToken.sol** : ERC20 ile oluşturulmuş, test için kullanılan USDX contractı
@@ -25,9 +28,12 @@ Sepolia testnet'inde Account Abstraction (ERC-4337) kullanarak yeni bir A cüzda
 * **TestSponsorship.t.sol** : forge test, anvil test, sepolia fork test için contract doğruluğunu test eder.
 
 ## Sepolia'da deploy edilmiş contract adresler
-**Resmi sepoliaEntryPoint** : `0x0000000071727De22E5E9d8BAf0edAc6f37da032`
+**Resmi sepoliaEntryPoint** : `0x0000000071727De22E5E9d8BAf0edAc6f37da032` 
+
 **SimpleAccountFactory** : `0x8B15cA3e809aFae4039aF05F6D7Eb117e056C5bE`
+
 **Paymaster** : `0xB12C53F7Ab00897Cb8990afbEFb239A418aBea4d`
+
 **testToken** : `0x759f62A65f5A2dEb8Afe344504200156FfAA6528`
 
 ## Transaction işlemleri Etherscan link'leri ile verification  (Sepolia Etherscan)
@@ -85,3 +91,41 @@ forge script script/RunSponsorship.s.sol:RunSponsorship \
   --force
 
 ```
+### Test Görüntüleri
+
+
+##### local test
+     
+     <img width="1577" height="432" alt="testlocal" src="https://github.com/user-attachments/assets/45a1465c-d243-4f1f-938d-9e7edd44252c" />
+
+##### anvil test
+
+     <img width="1802" height="437" alt="anviltest2" src="https://github.com/user-attachments/assets/2021b79a-fbd1-4ed9-98c0-b92b0957c5c4" />
+
+
+
+##### sepolia fork test
+
+     <img width="1822" height="437" alt="sepolia fork test" src="https://github.com/user-attachments/assets/fe4bc21e-d86a-4f14-929b-1eaca173e9ba" />
+
+
+
+##### sepolia canlı ağ consol logları
+
+     <img width="1853" height="805" alt="consolçıktı" src="https://github.com/user-attachments/assets/deeb0340-5a94-493f-b49f-ea4153490f30" />
+
+
+###### Tranasction HASH
+
+     <img width="962" height="572" alt="gercekagislem" src="https://github.com/user-attachments/assets/60b26608-2198-4728-bb03-eacd9301f16f" />
+
+###### Oluşturulan Wallet ve transfer işlemi
+
+     <img width="1663" height="187" alt="aWalletTransaction" src="https://github.com/user-attachments/assets/23c9051e-9d71-4e71-9507-f3f8362dd540" />
+
+
+
+
+
+
+

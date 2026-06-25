@@ -23,7 +23,7 @@ contract RunSponsorship is Script {
         uint256 ownerPrivateKey = vm.envUint("PRIVATE_KEY");
         address ownerAddress = vm.addr(ownerPrivateKey);
         vm.startBroadcast(ownerPrivateKey);
-        // yeni B cüzdanı oluşturma 
+        // yeni B cüzdanı oluşturma
         uint256 bWalletPrivateKey = uint256(keccak256(abi.encodePacked("bWalletPrivateKey")));
         address bWalletAddress = vm.addr(bWalletPrivateKey);
         // contrat-ayarlama
@@ -32,20 +32,20 @@ contract RunSponsorship is Script {
         TestToken token = TestToken(testToken);
 
         // wallet oluşturma - önceden mat. hesaplarıyla biliyoruz
-        address aWalletAdress = factory.getAddress(ownerAddress,0);
-        console.log(" A wallet adres : " ,aWalletAdress );
+        address aWalletAdress = factory.getAddress(ownerAddress, 0);
+        console.log(" A wallet adres : ", aWalletAdress);
 
         // Act - eylem
-        
-        if(aWalletAdress.code.length == 0){
+
+        if (aWalletAdress.code.length == 0) {
             console.log("Wallet olusturuluyor");
-            factory.createAccount(ownerAddress,0);
+            factory.createAccount(ownerAddress, 0);
         }
 
-        token.mint(aWalletAdress,50 * 10**6); // 50
+        token.mint(aWalletAdress, 50 * 10 ** 6); // 50
         console.log("Wallet'a token mint");
 
-        // gas harmacaları artarsa diye 
+        // gas harmacaları artarsa diye
         entryPoint.depositTo{value: 0.2 ether}(address(paymaster));
         console.log("Paymaster'a EntryPoint uzerinden ek deposit yukleniyor...");
         vm.stopBroadcast();
@@ -53,59 +53,57 @@ contract RunSponsorship is Script {
         uint256 aWalletIlkBakiye = token.balanceOf(aWalletAdress);
         uint256 bWalletIlkBakiye = token.balanceOf(bWalletAddress);
 
-        console.log("Akilli Cuzdan (A) ilk Token :", aWalletIlkBakiye / 10**6, "TOKEN");
-        console.log("Alici Cuzdan  (B) ilk Token  :", bWalletIlkBakiye / 10**6, "TOKEN");
-    
+        console.log("Akilli Cuzdan (A) ilk Token :", aWalletIlkBakiye / 10 ** 6, "TOKEN");
+        console.log("Alici Cuzdan  (B) ilk Token  :", bWalletIlkBakiye / 10 ** 6, "TOKEN");
+
         // Paymaster hazırlığı
         // transfer - alıcı- miktar
-        bytes memory tokenTransferData = abi.encodeWithSelector(token.transfer.selector, bWalletAddress, 10 * 10**6 );
-        // callData ile işlemi off-chainde hazırlıyor 
-        bytes memory executeCallData = abi.encodeWithSelector(SimpleAccount.execute.selector,token,0,tokenTransferData);
+        bytes memory tokenTransferData = abi.encodeWithSelector(token.transfer.selector, bWalletAddress, 10 * 10 ** 6);
+        // callData ile işlemi off-chainde hazırlıyor
+        bytes memory executeCallData =
+            abi.encodeWithSelector(SimpleAccount.execute.selector, token, 0, tokenTransferData);
 
         // UserOperation oluşturma
         PackedUserOperation memory userOp;
         userOp.sender = aWalletAdress;
-        userOp.nonce = entryPoint.getNonce(aWalletAdress,0);
-        userOp.initCode = bytes(""); // cüzdan oluşturulması 
+        userOp.nonce = entryPoint.getNonce(aWalletAdress, 0);
+        userOp.initCode = bytes(""); // cüzdan oluşturulması
         userOp.callData = executeCallData;
         // gas ayarları
-        uint128 verificationGasLimit = 200000; 
-        uint128 callGasLimit = 200000;         
+        uint128 verificationGasLimit = 200000;
+        uint128 callGasLimit = 200000;
         userOp.accountGasLimits = bytes32((uint256(verificationGasLimit) << 128) | callGasLimit);
         userOp.preVerificationGas = 100000;
         userOp.gasFees = bytes32((uint256(3 gwei) << 128) | 3 gwei);
         uint128 paymasterVerificationGasLimit = 200000;
         uint128 paymasterPostOpGasLimit = 100000;
         //sponsor ödeme ayarları
-        // address, gas ,gas  
+        // address, gas ,gas
         userOp.paymasterAndData = abi.encodePacked(
-            address(paymaster), 
-            uint128(paymasterVerificationGasLimit), 
-            uint128(paymasterPostOpGasLimit));
+            address(paymaster), uint128(paymasterVerificationGasLimit), uint128(paymasterPostOpGasLimit)
+        );
 
         //imzalama
         bytes32 userOpHash = entryPoint.getUserOpHash(userOp);
-        bytes32 ethSignedMessageHash = keccak256(
-            abi.encodePacked("\x19Ethereum Signed Message:\n32", userOpHash)
-        );
-        (uint8 v , bytes32 r , bytes32 s) = vm.sign(ownerPrivateKey,ethSignedMessageHash);
-        userOp.signature = abi.encodePacked(r,s,v);
+        bytes32 ethSignedMessageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", userOpHash));
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(ownerPrivateKey, ethSignedMessageHash);
+        userOp.signature = abi.encodePacked(r, s, v);
 
         PackedUserOperation[] memory ops = new PackedUserOperation[](1);
         ops[0] = userOp;
         console.log("PackedUserOperation sepolia send");
-        
-        // bundler gibi davranıp sepoliaya gönderme 
+
+        // bundler gibi davranıp sepoliaya gönderme
         uint256 bundlerPrivateKey = vm.envUint("BUNDLER_PRIVATE_KEY");
         address bundlerAddress = vm.addr(bundlerPrivateKey);
         bytes memory data = abi.encodeWithSelector(
             entryPoint.handleOps.selector, //işlem
-            ops, // gön. data 
-            payable(bundlerAddress) // ödemeyi ağa yapacak address 
+            ops, // gön. data
+            payable(bundlerAddress) // ödemeyi ağa yapacak address
         );
         vm.startBroadcast(bundlerPrivateKey);
         (bool success, bytes memory returnData) = address(entryPoint).call{gas: 10000000}(data);
-        
+
         if (!success) {
             // Eğer bir hata oluşursa ham hata verisini (hex) loglayarak terminale basıyoruz
             console.log("Low-level call failed!");
@@ -115,7 +113,7 @@ contract RunSponsorship is Script {
                 revert("Raw call reverted with no reason");
             }
         }
-        
+
         vm.stopBroadcast();
 
         console.log("Transfer sepolia aginda..");
@@ -124,12 +122,11 @@ contract RunSponsorship is Script {
         uint256 aWalletSonBakiye = token.balanceOf(aWalletAdress);
         uint256 bWalletSonBakiye = token.balanceOf(bWalletAddress);
         console.log("wallet code:", aWalletAdress.code.length);
-        console.log("nonce:", entryPoint.getNonce(aWalletAdress,0));
+        console.log("nonce:", entryPoint.getNonce(aWalletAdress, 0));
         console.log("deposit:", entryPoint.balanceOf(paymaster));
         console.logBytes32(userOp.accountGasLimits);
         console.logBytes(userOp.paymasterAndData);
-        console.log("Akilli Cuzdan (A) Kalan Token :", aWalletSonBakiye / 10**6, "TOKEN");
-        console.log("Alici Cuzdan  (B) Yeni Bakiye  :", bWalletSonBakiye / 10**6, "TOKEN");
+        console.log("Akilli Cuzdan (A) Kalan Token :", aWalletSonBakiye / 10 ** 6, "TOKEN");
+        console.log("Alici Cuzdan  (B) Yeni Bakiye  :", bWalletSonBakiye / 10 ** 6, "TOKEN");
     }
-  
-} 
+}

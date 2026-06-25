@@ -1,7 +1,7 @@
 # ERC-4337 v0.7 Account Abstraction & Paymaster Sponsorship Projesi
 
 ## Proje Detayları 
-Sepolia testnet'inde Account Abstraction (ERC-4337) kullanarak yeni bir A cüzdanı oluşturuyoruz. A cüzdanına test token olan USDX tokeni mint ediyoruz. A cüzdanın içinde USDX tokendan başka bir değer yok. A cüzdanından B cüzdanına token transferi gerçekleştirirken,gas fee ödemesi için paymaster ile bir sponsor cüzdanı ayarlıyoruz. Transfer işlemini bir bundler alıyor ve EntryPoint'e gidip sponsor'un gerçekte olup olmadığını kontrol ediyor. Entrypoint contractında sponsor bakiyesi varsa işlemi bundler ağa gönderiliyor. Sonra burada harcanan gası entryPoint contractı içinde bulunan sponsor hesabından alınıp bundler'a ödeniyor.Yani A cüzdanında hiç eth olmadan gönderim işlemi yapılıyor en sonunda transfer gas fee'leri sponsor cüzdanından kesiliyor.
+Sepolia testnet'inde Account Abstraction (ERC-4337) kullanarak yeni bir A cüzdanı oluşturuyoruz. A cüzdanına test token olan USDX tokeni mint ediyoruz. A cüzdanın içinde USDX tokendan başka bir değer yok. A cüzdanından B cüzdanına token transferi gerçekleştirirken,gas fee ödemesi için paymaster ile bir sponsor cüzdanı ayarlıyoruz. Transfer işlemini bir bundler alıyor ve EntryPoint'e gidip sponsor'un gerçekte olup olmadığını kontrol ediyor. Entrypoint contractında sponsor bakiyesi varsa işlemi bundler ağa gönderiliyor. Sonra burada harcanan gası entryPoint contractı içinde bulunan sponsor hesabından alınıp bundler'a ödeniyor. Yani A cüzdanında hiç eth olmadan gönderim işlemi yapılıyor en sonunda transfer gas fee'leri sponsor cüzdanından kesiliyor.
 
 #### script dosyaları
 * **DeploySimpleAccount.s.sol** : Contract deploy ayarları yapılır. Hem local hemde SEPOLİA ağı ile uyumludur.
@@ -10,18 +10,15 @@ Sepolia testnet'inde Account Abstraction (ERC-4337) kullanarak yeni bir A cüzda
 #### src dosyaları
 
 * **SimpleAccount.sol** : Account-abstraction (erc4337) ile oluşturuldu.
-   
-      * **validateUserOp** -> Kullanıcı bilgilerini, kullanıcı imza hashını,ödenecek min. tutar miktarını alır.
-      * **validateSignature** -> EIP-191 imzalama işlemi ile userOpHash'dan gelen imza   doğrulaması yapılır.
-      * **execute** -->  Transfer adresi,gönderilecek tutar,işlem bilgilerini alır.
+   1. **validateUserOp** -> Kullanıcı bilgilerini, kullanıcı imza hashını,ödenecek min. tutar miktarını alır.
+   2. **validateSignature** -> EIP-191 imzalama işlemi ile userOpHash'dan gelen imza   doğrulaması yapılır.
+   3.  **execute* -->  Transfer adresi,gönderilecek tutar,işlem bilgilerini alır.
 * **SimpleAccountFactory.sol** : SimpleAccount ile yeni wallet oluşturmak için  kullanılır.
-  
-      * **createAccount** -> owner ve salt ile işlem yapar. Yeni cüzdan deploy eden adresin bilgileriyle oluşur
-      * **getAddress** -> owner ve salt ile işlem yapar.Create2 kullanılır, matematiksel olarak adresi hesaplar.
+  1. **createAccount** -> owner ve salt ile işlem yapar. Yeni cüzdan deploy eden adresin bilgileriyle oluşur
+  2. **getAddress** -> owner ve salt ile işlem yapar.Create2 kullanılır, matematiksel olarak adresi hesaplar.
 * **Paymaster.sol** : BasePaymaster ile oluşturulur. Sponsor contract.
-  
-      * **_validatePaymasterUserOp** -> userOp, userOpHash, ayarlanan gas miktarının gönderilmesi ve onaylanması yapılır.
-      * **getCheckBalance** -> EntryPoint contractında bulunan balance kontrolunü yapar.
+  1. **_validatePaymasterUserOp** -> userOp, userOpHash, ayarlanan gas miktarının gönderilmesi ve onaylanması yapılır.
+  2. **getCheckBalance** -> EntryPoint contractında bulunan balance kontrolunü yapar.
 * **TestToken.sol** : ERC20 ile oluşturulmuş, test için kullanılan USDX contractı
 
 #### test dosyası
